@@ -4,23 +4,11 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Spawner : MonoBehaviour
 {
-    private Collider spawnArea;
-
     public GameObject[] fruitPrefabs;
     public GameObject bombPrefab;
-    [Range(0f, 1f)]
-    public float bombChance = 0.05f;
+    public SpawnerSettings settings;
 
-    public float minSpawnDelay = 0.25f;
-    public float maxSpawnDelay = 1f;
-
-    public float minAngle = -15f;
-    public float maxAngle = 15f;
-
-    public float minForce = 18f;
-    public float maxForce = 22f;
-
-    public float maxLifetime = 5f;
+    private Collider spawnArea;
 
     private void Awake()
     {
@@ -45,7 +33,8 @@ public class Spawner : MonoBehaviour
         {
             GameObject prefab = fruitPrefabs[Random.Range(0, fruitPrefabs.Length)];
 
-            if (Random.value < bombChance) {
+            if (Random.value < settings.bombChance)
+            {
                 prefab = bombPrefab;
             }
 
@@ -56,16 +45,14 @@ public class Spawner : MonoBehaviour
                 z = Random.Range(spawnArea.bounds.min.z, spawnArea.bounds.max.z)
             };
 
-            Quaternion rotation = Quaternion.Euler(0f, 0f, Random.Range(minAngle, maxAngle));
-
+            Quaternion rotation = Quaternion.Euler(0f, 0f, Random.Range(settings.minAngle, settings.maxAngle));
             GameObject fruit = Instantiate(prefab, position, rotation);
-            Destroy(fruit, maxLifetime);
+            Destroy(fruit, settings.maxLifetime);
 
-            float force = Random.Range(minForce, maxForce);
+            float force = Random.Range(settings.minForce, settings.maxForce);
             fruit.GetComponent<Rigidbody>().AddForce(fruit.transform.up * force, ForceMode.Impulse);
 
-            yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
+            yield return new WaitForSeconds(Random.Range(settings.minSpawnDelay, settings.maxSpawnDelay));
         }
     }
-
 }
