@@ -29,7 +29,7 @@ Zigurous's Fruit Ninja game sample adapted to use ECS.
 ## 💾 Using DOTS
 > The Data-Oriented Technology Stack (DOTS) in Unity is a set of performance-optimized systems including the Entity Component System (ECS), the C# Job System, and the Burst Compiler, designed to improve scalability and efficiency for complex simulations and large-scale game development. DOTS allows developers to write highly performant code by leveraging multi-threading and memory optimization techniques.
 
-Using DOTS packages, without getting very deep into it, it already improved in 44% the frame time (CPU ms). DOTS for president!
+Using DOTS packages, right out of the box, it already improved in 44% the frame time (CPU ms). DOTS for president!
 
 <p align="center">
   <img src="https://github.com/JoanStinson/FruitNinjaECS/blob/main/UserImages/WhatIsECSinfographic0000.png">
